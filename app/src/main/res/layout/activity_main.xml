@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/activity_main_bienvenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="40dp"
+        android:textSize="40px"
+        android:text="Bienvenue dans le jeu mystère !" />
+
+    <TextView
+        android:id="@+id/activity_main_explication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        android:text="Le but du jeu est de deviner quel chiffre je suis en un minimun de coup. Prêt ? Alors, c'est parti :)"/>
+
+    <Button
+        android:id="@+id/activity_main_jouer_btn"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JOUER"/>
+
+</LinearLayout>
