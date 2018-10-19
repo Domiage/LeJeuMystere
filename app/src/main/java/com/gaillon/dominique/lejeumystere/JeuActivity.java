@@ -1,5 +1,7 @@
 package com.gaillon.dominique.lejeumystere;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -63,7 +67,7 @@ public class JeuActivity extends AppCompatActivity {
         mBoutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nbCoups++; // A REPLACER !!
+                nbCoups++; // A REPLACER ?
                 String chiffreRentre = mChiffreInput.getText().toString(); // marche
                 int result = Integer.parseInt(chiffreRentre); //conversion en int
 
@@ -72,6 +76,8 @@ public class JeuActivity extends AppCompatActivity {
                 //mMessageVariation.setText(chiffreRentre);
                 //mMessageVariation.setText(String.valueOf(result));
 
+                // Commentaires en fonction de ce qu'à rentrer l'utilisateur
+                // il faut ajouter une boite de dialogue (android dialog())
                 if (result < 100 && result >= 0) {
                     // affichage "c'est plus" ou "c'est moins" en fonction de la valeur de result
                     if (result < nbAleatoire) {
@@ -80,7 +86,8 @@ public class JeuActivity extends AppCompatActivity {
                         mMessageVariation.setText("C'est moins !");
                     }
                     else {
-                        mMessageVariation.setText("Félicitations !");
+                        showAlertDialog();
+                        //mMessageVariation.setText("Félicitations !");
                     }
                     mChiffreInput.setText("");
                 } else {
@@ -90,5 +97,38 @@ public class JeuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // boite de dialogue lorsque l'utilisateur trouve la bonne réponse
+    public void showAlertDialog() { //View v en paramètre ?
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Félicitations !");
+        alertDialog.setMessage("Vous avez trouvé la bonne réponse en ... coups.");
+
+        alertDialog.setPositiveButton("Menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Toast.makeText(getApplicationContext(), "Menu séletionné", Toast.LENGTH_SHORT).show();
+                finish(); // finish permet de revenir à la première activité (lancement de l'application)
+            }
+        });
+
+        alertDialog.setNegativeButton("Quitter l'application", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Toast.makeText(getApplicationContext(), "Quitter séletionné", Toast.LENGTH_SHORT).show();
+                //finish();
+                //Intent intent = new Intent();
+                //intent.setAction(Intent.ACTION_MAIN);
+                //intent.addCategory(Intent.CATEGORY_HOME);
+                //this.startActivity(intent); // startActivity ne marche pas
+                //finish();
+                //finish();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
+            }
+        });
+
+        alertDialog.show();
     }
 }
