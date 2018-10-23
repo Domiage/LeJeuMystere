@@ -23,9 +23,9 @@ public class JeuActivity extends AppCompatActivity {
     private TextView mMessageVariation;
 
     private int nbCoups = 0;
-    private int min = 0;
+    private int min = 1;
     private int max = 100;
-    // génération d'un chiffre aléatoire entre 0 et 100
+    // génération d'un chiffre aléatoire entre 1 et 100
     private int nbAleatoire;
 
     @Override
@@ -67,7 +67,7 @@ public class JeuActivity extends AppCompatActivity {
         mBoutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nbCoups++; // A REPLACER ?
+                //nbCoups++; // A REPLACER ?
                 String chiffreRentre = mChiffreInput.getText().toString(); // marche
                 int result = Integer.parseInt(chiffreRentre); //conversion en int
 
@@ -78,7 +78,8 @@ public class JeuActivity extends AppCompatActivity {
 
                 // Commentaires en fonction de ce qu'à rentrer l'utilisateur
                 // il faut ajouter une boite de dialogue (android dialog())
-                if (result < 100 && result >= 0) {
+                if (result < 100 && result > 0) {
+                    nbCoups++; // incrémentation du nombre de coups quand le chiffre rentré par l'utilisateur est entre 1 et 100
                     // affichage "c'est plus" ou "c'est moins" en fonction de la valeur de result
                     if (result < nbAleatoire) {
                         mMessageVariation.setText("C'est plus !");
@@ -91,10 +92,8 @@ public class JeuActivity extends AppCompatActivity {
                     }
                     mChiffreInput.setText("");
                 } else {
-                    mMessageVariation.setText("Vous devez saisir un chiffre entre 0 et 100 !");
+                    mMessageVariation.setText("Vous devez saisir un chiffre entre 1 et 100 !");
                 }
-
-
             }
         });
     }
@@ -103,7 +102,7 @@ public class JeuActivity extends AppCompatActivity {
     public void showAlertDialog() { //View v en paramètre ?
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Félicitations !");
-        alertDialog.setMessage("Vous avez trouvé la bonne réponse en ... coups.");
+        alertDialog.setMessage("Vous avez trouvé la bonne réponse en " + nbCoups + " coups.");
 
         alertDialog.setPositiveButton("Menu", new DialogInterface.OnClickListener() {
             @Override

@@ -17,7 +17,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="Je suis un chiffre entre 0 et 100. Qui suis-je ?"/>
+        android:text="Je suis un chiffre entre 1 et 100. Qui suis-je ?"/>
 
     <EditText
         android:id="@+id/activity_jeu_chiffre_input"
