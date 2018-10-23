@@ -116,16 +116,9 @@ public class JeuActivity extends AppCompatActivity {
         alertDialog.setNegativeButton("Quitter l'application", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Toast.makeText(getApplicationContext(), "Quitter séletionné", Toast.LENGTH_SHORT).show();
-                //finish();
-                //Intent intent = new Intent();
-                //intent.setAction(Intent.ACTION_MAIN);
-                //intent.addCategory(Intent.CATEGORY_HOME);
-                //this.startActivity(intent); // startActivity ne marche pas
-                //finish();
-                //finish();
+                // passe l'application en arrière plan
+                moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(0);
             }
         });
 
